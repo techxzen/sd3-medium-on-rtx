@@ -7,27 +7,12 @@ import time
 
 print("begin")
 
-'''
 pipe = StableDiffusion3Pipeline.from_pretrained(
     "./stable-diffusion-3-medium-diffusers",
     torch_dtype=torch.float16,
     text_encoder_3=None)
-'''
 
-pipe = StableDiffusion3Pipeline.from_single_file(
-    #"./stable-diffusion-3-medium/sd3_medium_incl_clips.safetensors",
-    "./stable-diffusion-3-medium/sd3_medium_incl_clips_t5xxlfp8.safetensors",
-    config="./stable-diffusion-3-medium-diffusers",
-    torch_dtype=torch.float16,
-    text_encoder_3=None
-)
-
-
-if (sys.argv[1] == "cuda"):
-    pipe = pipe.to("cuda")
-else:
-    pipe.enable_model_cpu_offload()
-
+pipe.enable_model_cpu_offload()
 
 while (1):
     prompt = input("> prompt('bye' to exit): ")
